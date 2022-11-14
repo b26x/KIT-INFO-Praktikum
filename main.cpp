@@ -8,6 +8,7 @@ const bool showDebug = false;
 
 const int x_resolution = 512;
 const int y_resolution = 512;
+//Bearbeiten um entsprechende 
 string dataFilePath = "C:\\Code\\Hauptflamme.txt";
 
 double input_data[x_resolution][y_resolution];
