@@ -4,8 +4,6 @@
 
 using namespace std;
 
-
-//tauscht Zeilen einer Matrix und gibt die bearbeitete Matrix zurück
 vector<vector<long double>> swapRow(vector<vector<long double>> mtrx, int row1, int row2){
     for (int i = 0; i < mtrx[0].size(); i++){
         swap(mtrx[row1][i],mtrx[row2][i]);
@@ -13,8 +11,7 @@ vector<vector<long double>> swapRow(vector<vector<long double>> mtrx, int row1, 
     return mtrx;  
    
 }
-//zieht das vielfache einer Zeile (Substrahenten-Zeile) von einer andern Zeile ab (Minueten-Zeile), 
-//sodass 0 an einer definierten Stelle entsteht (Index der Stelle muss durch das letzte Argument angegeben werden)
+
 vector<vector<long double>> subRowsByMulti(vector<vector<long double>> mtrx, int rowMinuent, int rowSubtra, int curColumn){
     long double multi = mtrx[rowMinuent][curColumn]/mtrx[rowSubtra][curColumn];
     for (int i = 0; i < mtrx[0].size(); i++){
@@ -23,20 +20,31 @@ vector<vector<long double>> subRowsByMulti(vector<vector<long double>> mtrx, int
     return mtrx;    
 }
 
-//gibt die Matrix in 2dimenionaler Form im Terminal zurück
+vector<long double> returnResAsVector(vector<vector<long double>> mtrx){
+    vector<long double> vec(mtrx.size());
+    for (int i = 0; i < mtrx.size(); i++){
+        vec[i] = mtrx[i][mtrx[0].size()-1];
+    }
+    
+    return vec;
+}
+
+void printVector(vector<long double> vec){
+    for (int j = 0; j < vec.size(); j++){
+            cout<<vec[j]<<"\t";
+    }
+    cout<<endl;
+}
+
 void printMtrx(vector<vector<long double>> mtrx){
     //cout<<"\n-------\nResolution: "<<mtrx.size()<<" rows with "<< mtrx[0].size()<<" columns.\n-------\n";
     cout<<endl;
     for (int i = 0; i < mtrx.size(); i++){
-        for (int j = 0; j < mtrx[i].size(); j++){
-            cout<<mtrx[i][j]<<"\t";
-        }
-        cout<<endl;
+        printVector(mtrx[i]);
     }
     
 }
 
-//löst ein LGS in Form einer Matrix und gibt diese als Einheitsmatrix mit Lösungsspalte zurück
 vector<vector<long double>> solveMtrx(vector<vector<long double>> mtrx){
     int rows = mtrx.size();
     int columns = mtrx[0].size();
@@ -75,7 +83,11 @@ int main(){
     
     vector< vector<long double> > mtrx(3, vector<long double>(4,0));
     mtrx={{0,2,0,4},{1,1,2,6},{2,1,1,7}};
+    cout<<"Die Ausgangsmatrix:";
     printMtrx(mtrx);
-    solveMtrx(mtrx);
-
+    cout<<"Und jetzt einmal Lösen :)";
+    vector<long double> result = returnResAsVector(solveMtrx(mtrx));
+    cout<<endl;
+    printVector(result);
+    
 }
